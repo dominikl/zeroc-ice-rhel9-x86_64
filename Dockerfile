@@ -3,10 +3,8 @@
 FROM redhat/ubi9
 
 ENV SMDEV_CONTAINER_OFF=1
-ARG REDHAT_USERNAME
-ARG REDHAT_PASSWORD
 
-RUN subscription-manager register --username $REDHAT_USERNAME --password $REDHAT_PASSWORD --auto-attach
+RUN --mount=type=secret,id=redhat_org subscription-manager register --org $(cat /run/secrets/redhat_org) --activationkey Ice
 RUN subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms
 
 RUN dnf update -y
