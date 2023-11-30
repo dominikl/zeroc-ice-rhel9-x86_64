@@ -22,8 +22,6 @@ jobs:
           context: .
           tags: builder
           load: true
-          secrets: |
-            redhat_org=${{ secrets.REDHAT_ORG }}
       - name: Run
         run: |
           patch -p1 -d ice < 0001-OpenSSL-3.0-build-See-zeroc-ice-ice-1320.patch
